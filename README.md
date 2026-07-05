@@ -1,16 +1,66 @@
-# React + Vite
+# noraluk-portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+This is **my personal portfolio** — a place to introduce myself and showcase my
+work, built as an interactive terminal / HUD-style single page.
 
-Currently, two official plugins are available:
+Instead of a typical scrolling site, it's a fake desktop terminal: pick a
+command (About, Skills, Projects, Contact) by clicking a button or typing at the
+prompt, and the output types out like a real shell. The Projects section is a
+selectable browser — choose a project to open a readable detail card with an
+image slot, highlights, tech tags, and links.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Features
 
-## React Compiler
+- 🖥️ Terminal / IDE window UI with mac-style window controls and a live status bar
+- ⌨️ Type commands (`about`, `skills`, `projects`, `contact`, `help`, `clear`) or
+  just click — plus `↑`/`↓` to recall previous commands
+- 🗂️ Selectable project browser with image slots, ready to drop in screenshots
+- ✨ Boot sequence, typewriter output, CRT scanlines
+- ♿ Respects `prefers-reduced-motion`; keyboard and screen-reader friendly
+- 📱 Fully responsive — works on mobile and desktop
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Tech stack
 
-## Expanding the Oxlint configuration
+- [Vite](https://vite.dev/) + [React 19](https://react.dev/) (JSX, no TypeScript)
+- Plain CSS with design tokens (pure-black OLED theme, JetBrains Mono)
+- [Vitest](https://vitest.dev/) + Testing Library for tests, with an 80% coverage gate
+- [oxlint](https://oxc.rs/) for linting
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+## Getting started
+
+```bash
+npm install
+npm run dev      # start the dev server
+```
+
+Then open the printed local URL.
+
+## Scripts
+
+| Command             | What it does                              |
+| ------------------- | ----------------------------------------- |
+| `npm run dev`       | Start the dev server with HMR             |
+| `npm run build`     | Production build                          |
+| `npm run preview`   | Preview the production build              |
+| `npm run lint`      | Lint with oxlint                          |
+| `npm test`          | Run tests in watch mode                   |
+| `npm run coverage`  | Run tests once with the 80% coverage gate |
+
+## Project structure
+
+```
+src/
+  components/   reusable presentational UI (Tag, ImageFrame)
+  sections/     full sections (Terminal, ProjectBrowser)
+  hooks/        custom hooks (useTypewriter)
+  lib/          content + constants (edit projects here)
+  styles/       global CSS + design tokens
+  assets/       images, icons, fonts
+```
+
+## Editing content
+
+All content lives in [`src/lib/constants.js`](src/lib/constants.js) — About,
+Skills, Contact text and the `PROJECTS` list. To add a project, append an entry
+to `PROJECTS`; to show a screenshot, drop the file in `src/assets/`, import it,
+and set the project's `image` field (otherwise a placeholder is shown).
