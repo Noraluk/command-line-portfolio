@@ -1,6 +1,7 @@
 import { render, screen, fireEvent } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import Terminal from './Terminal'
+import { PROJECTS } from '../lib/constants'
 import { setReducedMotion } from '../test/setup'
 
 // With reduced motion on, the typewriter completes instantly, so boot finishes
@@ -26,6 +27,14 @@ describe('Terminal (reduced motion)', () => {
     render(<Terminal />)
     await user.click(screen.getByRole('button', { name: /Featured Projects/ }))
     expect(screen.getByText(/select a project/i)).toBeInTheDocument()
+  })
+
+  it('opens a project in a floating window from the browser', async () => {
+    const user = userEvent.setup()
+    render(<Terminal />)
+    await user.click(screen.getByRole('button', { name: /Featured Projects/ }))
+    await user.click(screen.getByText(PROJECTS[0].name))
+    expect(screen.getByRole('dialog')).toBeInTheDocument()
   })
 
   it('runs a command typed at the prompt', async () => {

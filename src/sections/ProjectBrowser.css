@@ -6,6 +6,9 @@
   from { opacity: 0; transform: translateY(4px); }
   to { opacity: 1; transform: none; }
 }
+@media (prefers-reduced-motion: reduce) {
+  .pb { animation: none; }
+}
 
 .pb-hint {
   margin: 0 0 var(--sp-2);
@@ -13,7 +16,6 @@
   font-size: 0.85rem;
 }
 
-/* --- list --- */
 .pb-list {
   display: flex;
   flex-direction: column;
@@ -51,105 +53,6 @@
   white-space: nowrap;
 }
 .pb-row__go { color: var(--term-accent); }
-
-/* --- detail --- */
-.pb-detail {
-  display: flex;
-  flex-direction: column;
-  gap: var(--sp-3);
-  border: 1px solid var(--term-border);
-  border-left: 2px solid var(--term-accent);
-  border-radius: var(--radius);
-  background: var(--term-panel);
-  padding: var(--sp-4);
-}
-.pb-back {
-  align-self: flex-start;
-  font: inherit;
-  font-size: 0.82rem;
-  color: var(--term-accent);
-  background: transparent;
-  border: 1px solid var(--term-border);
-  border-radius: var(--radius);
-  padding: 5px 10px;
-  cursor: pointer;
-  transition: border-color 0.15s, box-shadow 0.15s;
-}
-.pb-back:hover,
-.pb-back:focus-visible {
-  border-color: var(--term-accent);
-  box-shadow: var(--glow);
-  outline: none;
-}
-
-.pb-detail__head {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 0.8ch;
-}
-.pb-detail__name {
-  margin: 0;
-  font-size: 1.15rem;
-  color: var(--term-accent);
-}
-.pb-detail__name::before { content: '~/'; color: var(--term-dim); }
-.pb-detail__meta {
-  color: var(--term-amber);
-  font-size: 0.75rem;
-}
-
-.pb-detail__desc {
-  margin: 0;
-  white-space: pre-wrap;
-  line-height: 1.6;
-  color: var(--term-fg);
-}
-
-.pb-detail__highlights {
-  margin: 0;
-  padding-left: 0;
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: var(--sp-1);
-}
-.pb-detail__highlights li {
-  position: relative;
-  padding-left: 1.6ch;
-  color: var(--term-fg);
-  font-size: 0.88rem;
-}
-.pb-detail__highlights li::before {
-  content: '▹';
-  position: absolute;
-  left: 0;
-  color: var(--term-accent);
-}
-
-.pb-detail__tech {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--sp-2);
-}
-
-.pb-detail__links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--sp-4);
-  margin-top: var(--sp-1);
-}
-.pb-link {
-  color: var(--term-blue);
-  text-decoration: none;
-  transition: color 0.15s, text-shadow 0.15s;
-}
-.pb-link:hover,
-.pb-link:focus-visible {
-  color: var(--term-magenta);
-  text-shadow: 0 0 8px rgba(255, 95, 143, 0.4);
-  outline: none;
-}
 
 @media (max-width: 560px) {
   .pb-row {

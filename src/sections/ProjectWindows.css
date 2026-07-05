@@ -1,0 +1,49 @@
+/* The layer is a passthrough; windows position themselves (fixed) to the viewport. */
+.pw-layer {
+  display: contents;
+}
+
+/* Dock for minimized windows */
+.pw-dock {
+  position: fixed;
+  left: 50%;
+  bottom: 12px;
+  transform: translateX(-50%);
+  z-index: 9999;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--sp-2);
+  max-width: 92vw;
+  padding: 6px 10px;
+  background: var(--term-bar);
+  border: 1px solid var(--term-border);
+  border-radius: 999px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+}
+.pw-dock__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font: inherit;
+  font-size: 0.78rem;
+  color: var(--term-fg);
+  background: transparent;
+  border: 1px solid var(--term-border);
+  border-radius: 999px;
+  padding: 4px 12px;
+  cursor: pointer;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.pw-dock__item:hover,
+.pw-dock__item:focus-visible {
+  border-color: var(--term-accent);
+  box-shadow: var(--glow);
+  outline: none;
+}
+.pw-dock__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--term-amber);
+}

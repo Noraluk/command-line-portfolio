@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { useTypewriter } from '../hooks/useTypewriter'
 import { MENU, OUTPUT, BOOT_LINES, USER, HOST } from '../lib/constants'
 import ProjectBrowser from './ProjectBrowser'
+import ProjectWindowsProvider from './ProjectWindows'
 import './Terminal.css'
 
 const BOOT_TEXT = BOOT_LINES.join('\n')
@@ -195,7 +196,8 @@ export default function Terminal() {
   const focusInput = () => inputRef.current?.querySelector('input')?.focus()
 
   return (
-    <main className="term-window" role="application" aria-label="Terminal portfolio">
+    <ProjectWindowsProvider>
+      <main className="term-window" role="application" aria-label="Terminal portfolio">
       <header className="term-bar">
         <span className="term-dot term-dot--red" />
         <span className="term-dot term-dot--yellow" />
@@ -269,6 +271,7 @@ export default function Terminal() {
         <span className="term-status__hint">type a command & press Enter, or click below · ↑ recalls history</span>
         <Clock />
       </footer>
-    </main>
+      </main>
+    </ProjectWindowsProvider>
   )
 }
