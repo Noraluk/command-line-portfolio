@@ -18,7 +18,7 @@ describe('Terminal (reduced motion)', () => {
     const user = userEvent.setup()
     render(<Terminal />)
     await user.click(screen.getByRole('button', { name: /About Me/ }))
-    expect(screen.getByText(/Noraluk C\./)).toBeInTheDocument()
+    expect(screen.getByText(/Noraluk Chotibuth/)).toBeInTheDocument()
   })
 
   it('opens the interactive project browser', async () => {
@@ -33,7 +33,7 @@ describe('Terminal (reduced motion)', () => {
     render(<Terminal />)
     const input = screen.getByRole('textbox')
     await user.type(input, 'contact{Enter}')
-    expect(screen.getByText(/noraluk\.c@opn\.ooo/)).toBeInTheDocument()
+    expect(screen.getByText(/noraluk\.kn@gmail\.com/)).toBeInTheDocument()
   })
 
   it('reports unknown commands', async () => {
@@ -47,9 +47,9 @@ describe('Terminal (reduced motion)', () => {
     const user = userEvent.setup()
     render(<Terminal />)
     await user.click(screen.getByRole('button', { name: /About Me/ }))
-    expect(screen.getByText(/Noraluk C\./)).toBeInTheDocument()
+    expect(screen.getByText(/Noraluk Chotibuth/)).toBeInTheDocument()
     await user.click(screen.getByRole('button', { name: /Clear/ }))
-    expect(screen.queryByText(/Noraluk C\./)).not.toBeInTheDocument()
+    expect(screen.queryByText(/Noraluk Chotibuth/)).not.toBeInTheDocument()
   })
 
   it('recalls previous commands with Arrow Up / Down', async () => {
@@ -87,17 +87,19 @@ describe('Terminal (animated)', () => {
   })
 
   it('hides the menu while output types, then restores it', async () => {
-    // Real timers: let the typewriter actually run and wait for it to finish.
+    // Real timers: let the typewriter run and wait for it to finish. Use a
+    // short (unknown-command) output so the test stays fast.
+    const user = userEvent.setup()
     const { container } = render(<Terminal />)
     fireEvent.click(container.querySelector('.term-screen'))
 
-    fireEvent.click(screen.getByRole('button', { name: /About Me/ }))
+    await user.type(screen.getByRole('textbox'), 'zzz{Enter}')
     expect(screen.getByText('typing…')).toBeInTheDocument()
     expect(screen.queryByRole('button', { name: /About Me/ })).not.toBeInTheDocument()
 
     // The menu only comes back once output has fully typed (busy → false).
     await screen.findByRole('button', { name: /About Me/ }, { timeout: 8000 })
     expect(screen.queryByText('typing…')).not.toBeInTheDocument()
-    expect(screen.getByText(/Noraluk C\./)).toBeInTheDocument()
+    expect(screen.getByText(/command not found: zzz/)).toBeInTheDocument()
   })
 })

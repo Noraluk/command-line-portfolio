@@ -36,7 +36,7 @@ function ProjectDetail({ project, onBack }) {
 
       <div className="pb-detail__head">
         <h2 className="pb-detail__name">{name}</h2>
-        <span className="pb-detail__meta">{status} · {year}</span>
+        <span className="pb-detail__meta">{year ? `${status} · ${year}` : status}</span>
       </div>
 
       <ImageFrame src={image} alt={`${name} screenshot`} label={name} />
