@@ -1,0 +1,29 @@
+:root {
+  /* Terminal palette — pure black OLED base + HUD green accent */
+  --term-bg: #000000;
+  --term-panel: #060a08; /* card / raised surface over the OLED base */
+  --term-bar: #0a0a0a; /* window title bar */
+  --term-fg: #e6e6e6;
+  --term-dim: #7a7a7a;
+  --term-accent: #00ff99; /* primary HUD green */
+  --term-accent-soft: rgba(0, 255, 153, 0.12);
+  --term-blue: #4aa3ff;
+  --term-amber: #ffbd2e; /* warnings / status */
+  --term-magenta: #ff5f8f; /* accents / links hover */
+  --term-border: #1c2b24;
+  --term-border-bright: #2f5346;
+
+  --font-mono: 'JetBrains Mono', ui-monospace, 'Fira Code', monospace;
+
+  --sp-1: 0.25rem;
+  --sp-2: 0.5rem;
+  --sp-3: 0.75rem;
+  --sp-4: 1rem;
+  --sp-5: 1.5rem;
+  --sp-6: 2rem;
+
+  --radius: 6px;
+  --radius-lg: 10px;
+
+  --glow: 0 0 12px rgba(0, 255, 153, 0.25);
+}

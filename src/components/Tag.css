@@ -1,0 +1,11 @@
+.tag {
+  display: inline-block;
+  font-size: 0.72rem;
+  line-height: 1;
+  padding: 5px 9px;
+  border: 1px solid var(--term-border-bright);
+  border-radius: 999px;
+  color: var(--term-accent);
+  background: var(--term-accent-soft);
+  white-space: nowrap;
+}
