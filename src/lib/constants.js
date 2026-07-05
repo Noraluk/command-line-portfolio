@@ -28,7 +28,7 @@ export const OUTPUT = {
   ].join('\n'),
 
   about: [
-    'Noraluk Chotibuth — Full Stack Developer  ·  Bangkok, Thailand',
+    'Noraluk Chotibuth — Full Stack Developer  ·  Suphan Buri, Thailand',
     '',
     'Backend-focused engineer with 5+ years building scalable APIs and',
     'financial systems across the fintech and logistics sectors. Golang is',
@@ -65,7 +65,7 @@ export const OUTPUT = {
     'email    : noraluk.kn@gmail.com',
     'github   : github.com/Noraluk',
     'linkedin : www.linkedin.com/in/noraluk-chotibuth',
-    'location : Bangkok, Thailand',
+    'location : Suphan Buri, Thailand',
     '',
     'Best way to reach me is email — I usually reply within a day.',
   ].join('\n'),
