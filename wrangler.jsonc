@@ -1,0 +1,12 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "command-line-portfolio",
+  "compatibility_date": "2025-04-01",
+  // Static-assets-only Worker: serve the Vite build in ./dist.
+  // No "main" script and no ASSETS binding — this Worker only hosts files.
+  "assets": {
+    "directory": "./dist",
+    // SPA: unmatched routes return index.html with 200 (client-side routing).
+    "not_found_handling": "single-page-application"
+  }
+}

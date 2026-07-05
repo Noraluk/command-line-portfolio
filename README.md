@@ -1,5 +1,7 @@
 # noraluk-portfolio
 
+🔗 **Live:** https://command-line-portfolio.noraluk-kn.workers.dev
+
 This is **my personal portfolio** — a place to introduce myself and showcase my
 work, built as an interactive terminal / HUD-style single page.
 
