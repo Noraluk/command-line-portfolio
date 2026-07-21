@@ -33,6 +33,7 @@ export default function ProjectWindowsProvider({ children }) {
   }, [])
 
   const close = useCallback((id) => setWins((prev) => prev.filter((w) => w.project.id !== id)), [])
+  const closeAll = useCallback(() => setWins([]), [])
   const focus = useCallback((id) => patch(id, { z: (zRef.current += 1) }), [patch])
   const minimize = useCallback((id) => patch(id, { minimized: true }), [patch])
   const restore = useCallback((id) => patch(id, { minimized: false, z: (zRef.current += 1) }), [patch])
@@ -45,7 +46,7 @@ export default function ProjectWindowsProvider({ children }) {
   const minimized = wins.filter((w) => w.minimized)
 
   return (
-    <ProjectWindowsContext.Provider value={{ open }}>
+    <ProjectWindowsContext.Provider value={{ open, closeAll }}>
       {children}
 
       <div className="pw-layer">

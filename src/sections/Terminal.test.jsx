@@ -27,6 +27,23 @@ describe('Terminal (reduced motion)', () => {
     render(<Terminal />)
     await user.click(screen.getByRole('button', { name: /Featured Projects/ }))
     expect(screen.getByText(/select a project/i)).toBeInTheDocument()
+    expect(screen.queryByRole('button', { name: /About Me/ })).not.toBeInTheDocument()
+  })
+
+  it('returns to the main menu when exiting projects', async () => {
+    const user = userEvent.setup()
+    render(<Terminal />)
+    await user.click(screen.getByRole('button', { name: /Featured Projects/ }))
+    await user.click(screen.getByRole('button', { name: /back to main menu/i }))
+    expect(screen.getByRole('button', { name: /About Me/ })).toBeInTheDocument()
+  })
+
+  it('returns to the main menu from the project prompt', async () => {
+    const user = userEvent.setup()
+    render(<Terminal />)
+    await user.click(screen.getByRole('button', { name: /Featured Projects/ }))
+    await user.type(screen.getByRole('textbox', { name: /project command/i }), 'exit{Enter}')
+    expect(screen.getByRole('button', { name: /About Me/ })).toBeInTheDocument()
   })
 
   it('opens a project in a floating window from the browser', async () => {

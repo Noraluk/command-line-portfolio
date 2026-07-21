@@ -3,8 +3,8 @@ import userEvent from '@testing-library/user-event'
 import ProjectWindow from './ProjectWindow'
 import { PROJECTS } from '../lib/constants'
 
-// A project that has both a github and a demo link, to exercise both branches.
-const project = PROJECTS.find((p) => p.links.demo && p.links.github)
+const project = PROJECTS[0]
+const walkthroughProject = PROJECTS.find((p) => p.walkthrough)
 
 function setup(overrides = {}) {
   const handlers = {
@@ -34,13 +34,42 @@ describe('ProjectWindow', () => {
     expect(screen.getByRole('heading', { name: project.name })).toBeInTheDocument()
     expect(screen.getByText(project.tech[0])).toBeInTheDocument()
     expect(screen.getByText(project.highlights[0])).toBeInTheDocument()
-    expect(screen.getByRole('link', { name: /live demo/i })).toHaveAttribute(
-      'href',
-      project.links.demo,
+    if (project.links.demo) {
+      expect(screen.getByRole('link', { name: /live demo/i })).toHaveAttribute(
+        'href',
+        project.links.demo,
+      )
+    }
+    if (project.links.github) {
+      expect(screen.getByRole('link', { name: /github/i })).toHaveAttribute(
+        'href',
+        project.links.github,
+      )
+    }
+    if (project.walkthrough) {
+      expect(screen.getByRole('region', { name: /product walkthrough/i })).toBeInTheDocument()
+      const defaultFlow = project.walkthrough.find((flow) => flow.id === 'novel-detail')
+      expect(screen.getAllByRole('link', { name: /open .* screenshot/i })).toHaveLength(
+        defaultFlow.screens.length,
+      )
+    }
+  })
+
+  it('renders a selected walkthrough flow from the group menu', async () => {
+    const user = userEvent.setup()
+    setup({ project: walkthroughProject })
+
+    const firstFlow = walkthroughProject.walkthrough.find((flow) => flow.id === 'novel-detail')
+    expect(screen.getByRole('heading', { name: firstFlow.title })).toBeInTheDocument()
+    expect(screen.getAllByRole('link', { name: /open .* screenshot/i })).toHaveLength(
+      firstFlow.screens.length,
     )
-    expect(screen.getByRole('link', { name: /github/i })).toHaveAttribute(
-      'href',
-      project.links.github,
+
+    const nextFlow = walkthroughProject.walkthrough[1]
+    await user.click(screen.getByRole('button', { name: nextFlow.title }))
+    expect(screen.getByRole('heading', { name: nextFlow.title })).toBeInTheDocument()
+    expect(screen.getAllByRole('link', { name: /open .* screenshot/i })).toHaveLength(
+      nextFlow.screens.length,
     )
   })
 

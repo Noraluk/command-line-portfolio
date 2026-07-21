@@ -46,10 +46,8 @@ function BootSequence({ onDone }) {
   )
 }
 
-// One executed command entry. Text commands type out; the `projects` command
-// renders the interactive browser (which manages its own selection state).
-// Fires onDone once the output has fully appeared, so the terminal knows when
-// it's safe to show the menu/prompt again.
+// One executed text-command entry. Fires onDone once its output has fully
+// appeared, so the terminal knows when it's safe to show the menu/prompt again.
 function Entry({ cmd, kind, body, onDone }) {
   const [shown, done] = useTypewriter(kind === 'text' ? body : '')
   useEffect(() => {
@@ -58,14 +56,10 @@ function Entry({ cmd, kind, body, onDone }) {
   return (
     <div className="term-entry">
       <Prompt cmd={cmd} />
-      {kind === 'text' ? (
-        <pre className="term-output">
-          {shown}
-          {!done && <span className="term-caret" />}
-        </pre>
-      ) : (
-        <ProjectBrowser />
-      )}
+      <pre className="term-output">
+        {shown}
+        {!done && <span className="term-caret" />}
+      </pre>
     </div>
   )
 }
@@ -141,6 +135,7 @@ export default function Terminal() {
   const [history, setHistory] = useState([])
   const [past, setPast] = useState([]) // raw command strings, for Up/Down recall
   const [busy, setBusy] = useState(false) // true while the newest output is typing out
+  const [projectMode, setProjectMode] = useState(false)
   const endRef = useRef(null)
   const inputRef = useRef(null)
 
@@ -154,12 +149,16 @@ export default function Terminal() {
     setPast((p) => (p[p.length - 1] === cmd ? p : [...p, cmd]))
 
     const id = resolveCommand(cmd)
+    if (id === 'projects') {
+      setProjectMode(true)
+      return
+    }
     if (id === 'clear') {
       setHistory([])
       return
     }
     // Text/unknown output types out char-by-char; hide the menu until it lands.
-    if (id !== 'projects') setBusy(true)
+    setBusy(true)
     setHistory((h) => [
       ...h,
       id === null
@@ -172,7 +171,7 @@ export default function Terminal() {
         : {
             id: `${id}-${h.length}`,
             cmd,
-            kind: id === 'projects' ? 'projects' : 'text',
+            kind: 'text',
             body: OUTPUT[id],
           },
     ])
@@ -212,7 +211,10 @@ export default function Terminal() {
         {!booted ? (
           <BootSequence onDone={() => setBooted(true)} />
         ) : (
-          <>
+          projectMode ? (
+            <ProjectBrowser onExit={() => setProjectMode(false)} />
+          ) : (
+            <>
             <pre className="term-output term-welcome">{OUTPUT.welcome}</pre>
 
             {history.map((e) => (
@@ -260,7 +262,8 @@ export default function Terminal() {
               </>
             )}
             <div ref={endRef} />
-          </>
+            </>
+          )
         )}
       </div>
 

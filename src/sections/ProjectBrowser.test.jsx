@@ -30,4 +30,11 @@ describe('ProjectBrowser', () => {
       screen.getByRole('dialog', { name: new RegExp(first.name) }),
     ).toBeInTheDocument()
   })
+
+  it('opens a project from the project prompt', async () => {
+    const user = userEvent.setup()
+    renderBrowser()
+    await user.type(screen.getByRole('textbox', { name: /project command/i }), '1{Enter}')
+    expect(screen.getByRole('dialog', { name: new RegExp(PROJECTS[0].name) })).toBeInTheDocument()
+  })
 })

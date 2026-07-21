@@ -13,6 +13,11 @@
     );
   overflow: hidden;
 }
+.img-frame--portrait {
+  align-self: center;
+  width: min(100%, 220px);
+  aspect-ratio: 9 / 16;
+}
 
 .img-frame__img {
   display: block;
