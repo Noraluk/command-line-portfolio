@@ -48,7 +48,7 @@ describe('ProjectWindow', () => {
     }
     if (project.walkthrough) {
       expect(screen.getByRole('region', { name: /product walkthrough/i })).toBeInTheDocument()
-      const defaultFlow = project.walkthrough.find((flow) => flow.id === 'novel-detail')
+      const defaultFlow = project.walkthrough[0]
       expect(screen.getAllByRole('link', { name: /open .* screenshot/i })).toHaveLength(
         defaultFlow.screens.length,
       )
@@ -59,7 +59,7 @@ describe('ProjectWindow', () => {
     const user = userEvent.setup()
     setup({ project: walkthroughProject })
 
-    const firstFlow = walkthroughProject.walkthrough.find((flow) => flow.id === 'novel-detail')
+    const firstFlow = walkthroughProject.walkthrough[0]
     expect(screen.getByRole('heading', { name: firstFlow.title })).toBeInTheDocument()
     expect(screen.getAllByRole('link', { name: /open .* screenshot/i })).toHaveLength(
       firstFlow.screens.length,

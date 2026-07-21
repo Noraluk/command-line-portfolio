@@ -33,9 +33,7 @@ export default function ProjectWindow({
     walkthrough,
   } = project
   const drag = useRef(null)
-  const [activeFlow, setActiveFlow] = useState(
-    () => Math.max(0, walkthrough?.findIndex((flow) => flow.id === 'novel-detail') ?? 0),
-  )
+  const [activeFlow, setActiveFlow] = useState(0)
   const selectedFlow = walkthrough?.[activeFlow]
 
   const onPointerDown = (e) => {
