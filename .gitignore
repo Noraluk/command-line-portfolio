@@ -33,4 +33,4 @@ dist-ssr
 .impeccable/
 
 # Local source screenshots (the portfolio uses copied files in src/assets/)
-assets/
+/assets/

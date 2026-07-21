@@ -16,6 +16,12 @@ import novelHubTranslation from '../assets/14_novel_content_translate.png'
 import novelHubReaderSettings from '../assets/15_novel_content_detail.png'
 import novelHubEpisodes from '../assets/16_novel_episode_list.png'
 import novelHubProfile from '../assets/18_profile.png'
+import doFarmLogin from '../assets/dofarm-1.webp'
+import doFarmFarmList from '../assets/dofarm-2.webp'
+import doFarmPondList from '../assets/dofarm-3.webp'
+import doFarmPondOverview from '../assets/dofarm-4.webp'
+import doFarmGrowthChart from '../assets/dofarm-5.webp'
+import doFarmMarketPrices from '../assets/dofarm-6.webp'
 
 // Static portfolio content rendered inside the terminal.
 
@@ -211,6 +217,96 @@ export const PROJECTS = [
         { label: 'Mobile app · Flutter', url: 'https://github.com/Noraluk/novel-translator-mobile' },
         { label: 'API · Golang', url: 'https://github.com/Noraluk/novel-translator-api' },
         { label: 'Legacy crawler · v1', url: 'https://github.com/Noraluk/novel-translator-crawler' },
+      ],
+    },
+  },
+  {
+    id: 'dofarm',
+    name: 'DoFarm',
+    tagline: 'A live Flutter app that turns shrimp-farm activity into a clear daily operating picture.',
+    year: '2024–now',
+    status: 'live · Android / iOS',
+    role: 'One of the mobile app developers · Flutter / Dart · team contributor',
+    image: doFarmPondOverview,
+    imageAspect: 'portrait',
+    description: [
+      'DoFarm is a live cross-platform app for shrimp-farm management. It gives',
+      'farm operators one place to follow ponds, capture daily activity, and',
+      'review the information that drives operational decisions.',
+    ].join('\n'),
+    detailSections: [
+      {
+        title: 'A working app for day-to-day farm operations',
+        body: 'Shrimp farming creates many small but important records: feeding, shrimp growth, water quality, medicine, mortality, sales, and costs. DoFarm brings these records into a mobile workflow so a farm can move from scattered updates to a clearer operating view.',
+      },
+      {
+        title: 'My contribution',
+        body: 'I am one of the mobile app developers on the team. I contribute to the Flutter / Dart application that is delivered to real users on both Android and iPhone, working within the product team rather than presenting the project as a solo build.',
+      },
+      {
+        title: 'From a farm overview to a single pond',
+        body: 'The mobile experience starts with a farm-level overview, then lets users drill into individual ponds. Pond pages show operational snapshots, progress indicators, and trend charts so the important state is readable without leaving the app.',
+      },
+      {
+        title: 'Information that supports decisions',
+        body: 'Alongside records from the farm, the app includes market-price views. Putting practical operating data and price context on a phone helps a user review the situation where the work happens.',
+      },
+      {
+        title: 'Shipped to real app stores',
+        body: 'DoFarm is publicly available through Google Play and the App Store. This is production mobile work with an active release footprint—not a concept screen or an internal-only prototype.',
+      },
+    ],
+    highlights: [
+      'Farm overview that surfaces the status of multiple ponds',
+      'Pond-level records for feed, growth, water quality, medicine, mortality, sales, and costs',
+      'Operational trend charts and progress indicators for a clearer daily view',
+      'Shrimp market-price lookup inside the same mobile product',
+      'Released for Android on Google Play and iPhone on the App Store',
+      'Built as a team mobile product with Flutter and Dart',
+    ],
+    tech: ['Flutter', 'Dart'],
+    walkthrough: [
+      {
+        id: 'access',
+        title: 'Account access',
+        summary: 'A focused sign-in screen gives a team member a direct entry point to their farm workspace.',
+        screens: [
+          { image: doFarmLogin, label: 'Sign in', caption: 'Enter the DoFarm workspace with an account.' },
+        ],
+      },
+      {
+        id: 'farm-overview',
+        title: 'Farm overview',
+        summary: 'Start at the farm level, then choose the pond that needs attention.',
+        screens: [
+          { image: doFarmFarmList, label: 'Farm list', caption: 'A simple view of the farms available to the user.' },
+          { image: doFarmPondList, label: 'Pond list', caption: 'See the ponds within a farm and open one to inspect it further.' },
+        ],
+      },
+      {
+        id: 'pond-health',
+        title: 'Pond health',
+        summary: 'A pond page combines operational details, status indicators, and a growth trend into one review flow.',
+        screens: [
+          { image: doFarmPondOverview, label: 'Pond overview', caption: 'Review the selected pond’s key operating information and current status.' },
+          { image: doFarmGrowthChart, label: 'Growth trend', caption: 'Inspect the pond’s growth data in a time-series chart.' },
+        ],
+      },
+      {
+        id: 'market-prices',
+        title: 'Market context',
+        summary: 'Check shrimp prices in-app alongside the operational data collected from the farm.',
+        screens: [
+          { image: doFarmMarketPrices, label: 'Shrimp prices', caption: 'Browse market prices by shrimp size and date.' },
+        ],
+      },
+    ],
+    links: {
+      github: null,
+      demo: null,
+      stores: [
+        { label: 'Android · Google Play', url: 'https://play.google.com/store/apps/details?id=com.triofarm.do_farm' },
+        { label: 'iPhone · App Store', url: 'https://apps.apple.com/th/app/dofarm/id6602898033' },
       ],
     },
   },

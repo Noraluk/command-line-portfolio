@@ -5,6 +5,7 @@ import { PROJECTS } from '../lib/constants'
 
 const project = PROJECTS[0]
 const walkthroughProject = PROJECTS.find((p) => p.walkthrough)
+const dofarmProject = PROJECTS.find((p) => p.id === 'dofarm')
 
 function setup(overrides = {}) {
   const handlers = {
@@ -71,6 +72,13 @@ describe('ProjectWindow', () => {
     expect(screen.getAllByRole('link', { name: /open .* screenshot/i })).toHaveLength(
       nextFlow.screens.length,
     )
+  })
+
+  it('renders app-store links when a project provides them', () => {
+    setup({ project: dofarmProject })
+    for (const store of dofarmProject.links.stores) {
+      expect(screen.getByRole('link', { name: `> ${store.label}` })).toHaveAttribute('href', store.url)
+    }
   })
 
   it('fires the window controls', async () => {

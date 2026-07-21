@@ -206,6 +206,11 @@ export default function ProjectWindow({
               &gt; {label}
             </a>
           ))}
+          {links.stores?.map(({ label, url }) => (
+            <a className="pw__link" href={url} target="_blank" rel="noreferrer" key={url}>
+              &gt; {label}
+            </a>
+          ))}
         </div>
       </div>
     </section>
